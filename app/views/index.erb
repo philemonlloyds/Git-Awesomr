@@ -3,10 +3,16 @@
 <br>
 <br>
 <br>
-<br>
-<br>
 <center>
-  <a href="/">
-    <span style="font-size: 80px; color:white">Git <span style="color:#FFCE54">Awesomr </span></span>
-  </a>
+  <span style="font-size: 80px; color:white">Git <span style="color:#FFCE54">Awesomr </span></span>
+  <h4 class="offset">Yes, you are awesome, but you could Git Awesomr</h4>
+
+  <h4 style="color:white"class="description">
+    <br><br>
+    We understand that Git is not the easiest tool to use (seriously, we do). But it is an undeniably useful tool, even an essential tool for developers. We also know that the only way to become adept at using Git, is to well, use Git. So let us provide some inspiration, as well as the ability to track your progress as you become a Git Super User.  Just think, all that forking and cloning can help you unlock achievements and up your Git Awesomr Score! And if you are a tiny bit competitive, you can join a group and see how your Git usage and influence compares to your friends!
+  </h4><br>
+
+  <% unless @user %>
+    <a href="/login" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></a>  
+  <%end%>
 </center>

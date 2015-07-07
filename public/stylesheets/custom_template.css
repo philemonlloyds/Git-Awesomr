@@ -2,19 +2,17 @@
   border-color: white;
   border-style: dashed;
   border-width: 1px;
-}
-*/
+}*/
+
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
   padding-bottom: 20px;
 }
 
-
 html,
 body {
   height: 100%;
-  /*background-color: #333;*/
   background: url('../images/bg_dark.png');
   background-size: 40px 40px;
   background-repeat: repeat;
@@ -22,7 +20,7 @@ body {
 body {
   color: #fff;
   /*text-align: center;*/
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  /*text-shadow: 0 1px 3px rgba(0,0,0,.5);*/
 }
 
 .btn-success {
@@ -113,4 +111,47 @@ body {
 
 .progress-bar {
   background-color: #F6bb42;
+}
+
+h4 {
+  color: #F6bb42;
+}
+
+/*SETTINGS FOR CHARTJS*/
+canvas{
+  width: 100% !important;
+  /*max-width: 800px;*/
+  height: 100% !important;
+  max-height: 200px;
+  /*height: auto !important;*/
+}
+
+.right {
+    position: absolute;
+    right: 0px;
+    /*width: 300px;*/
+    background-color: #b0e0e6;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: #F6bb42;
+  text-decoration: underline;
+}
+
+.description {
+  width: 840px;
+  font-style: normal;
+}
+
+.offset {
+  /*padding-top: -200px;*/
+  position: relative;
+  margin-top: -0.5em;
+  font-style: italic;
 }

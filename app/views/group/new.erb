@@ -1,0 +1,29 @@
+<div>
+   <h2>Create a group:</h2>
+ </div>
+ <!-- <div>
+    <form class="new_group" action="/groups" method="post">
+
+      <p>
+        <label for="Group Name"></label>
+        <input type="text" class="form-control" name="Group Name" id="Group Name" placeholder="Group Name">
+      </p>
+      <p>
+        <label for="Add Member"></label>
+        <input type="text" class="form-control" name="Group Member" id="Group Member" placeholder="Add a Group Member">
+      </p> -->
+
+      <p><form action="/groups" method="post" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Group Name"></p>
+      <p><span id="multipleFileLabel" style="display:none">Multiple </span></p>
+      <p>Add members:</p>
+      <p><input type="text" name="username" multiple="multiple" placeholder="Member Username"></p>
+      <input type="submit">
+<!-- 
+</form>
+      <div>
+        <button type="submit" class="button button-block">Submit</button>
+      </div>
+    </form>
+    </div>
+</div> -->

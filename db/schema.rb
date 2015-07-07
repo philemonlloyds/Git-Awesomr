@@ -11,23 +11,57 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618155922) do
+ActiveRecord::Schema.define(version: 20150621152441) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "achievements", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "level"
+    t.string   "url"
+    t.integer  "criteria"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "repos", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "stars_count"
+    t.integer  "forks_count"
+    t.integer  "commits_count"
+    t.string   "language"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
 
   create_table "users", force: :cascade do |t|
+    t.integer  "group_id"
     t.string   "username"
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "token"
     t.string   "avatar_url"
     t.string   "location"
     t.integer  "followers"
-    t.integer  "following"
     t.integer  "public_repos"
     t.integer  "public_gists"
     t.date     "start_date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "flags"
+    t.integer  "score"
+    t.integer  "acct_age_level"
+    t.integer  "languages_level"
+    t.integer  "followers_level"
+    t.integer  "repos_level"
+    t.integer  "forks_level"
+    t.integer  "commits_level"
+    t.integer  "stars_level"
   end
 
 end

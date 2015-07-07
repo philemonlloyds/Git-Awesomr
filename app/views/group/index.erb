@@ -1,4 +1,85 @@
-<h2>Lighthouse Labs ('/group/:id')</h2>
+<!-- CHARTJS DATA -->
+<script>
+  $(document).ready(function() {
+  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  var user = <%= @achievement[:user] %>;
+  var group = <%= @achievement[:group] %>;
+
+  // ACHIVEMENTS GRAPH
+  var data = {
+    labels: ["Acc. Age", "Languages", "Followers", "Repositories","Forks", "Commits", "Stars"],
+    datasets: [
+      {
+          label: "User",
+          fillColor: "rgba(249,213,139,0.1)",
+          strokeColor: "#F6bb42",
+          pointColor: "#FFCE54",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          // data: [3, 3, 1, 3, 2, 3, 2]
+          data: user
+      },
+      {
+          label: "Group",
+          fillColor: "rgba(204,204,204,0.2)",
+          strokeColor: "white",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          // data: [2.7, 2.1, 2.6, 1.8, 2.2, 2.3, 1.8]
+          data: group
+      }
+    ]
+  };
+  // Get context with jQuery - using jQuery's .get() method.
+  var ctx = $("#achievements").get(0).getContext("2d");
+  var myLineChart = new Chart(ctx).Line(data);
+
+
+  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  var user_score = <%= @average_score[:user] %>;
+  var group_score = <%= @average_score[:group] %>;
+  var user_names = <%= @average_score[:user_names]%>;
+  
+  // AVERAGE SCORE GRAPH
+  var data = {
+    labels: user_names,
+    datasets: [
+      {
+          label: "User",
+          fillColor: "rgba(249,213,139,0.1)",
+          strokeColor: "#F6bb42",
+          pointColor: "#FFCE54",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(220,220,220,1)",
+          // data: [3, 3, 1, 3, 2, 3, 2]
+          data: user_score
+      },
+      {
+          label: "Group",
+          fillColor: "rgba(204,204,204,0.2)",
+          strokeColor: "white",
+          pointColor: "rgba(220,220,220,1)",
+          pointStrokeColor: "#fff",
+          pointHighlightFill: "#fff",
+          pointHighlightStroke: "rgba(151,187,205,1)",
+          // data: [2.7, 2.1, 2.6, 1.8, 2.2, 2.3, 1.8]
+          data: group_score
+      }
+    ]
+  };
+  // Get context with jQuery - using jQuery's .get() method.
+  var ctx = $("#average_scores").get(0).getContext("2d");
+  var myLineChart = new Chart(ctx).Line(data);
+
+  });
+</script>
+
+
+<h2>Lighthouse Labs</h2>
 <hr>
 <div class="row">
   <div class="col-md-2">
@@ -7,36 +88,18 @@
     <br>
 
     <h4>Average Score: </h4>
-    <span class=".score">42</span>
+    <span class=".score"><%= User.all.inject(0) {|total, user| total + user.score}/User.all.count %></span>
+    
     <h4>Members: </h4>
-
-    <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/phil.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/beth.jpeg" alt="..." class="img-rounded-sm"></a>
-
-    <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/phil.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/beth.jpeg" alt="..." class="img-rounded-sm"></a>
-
-    <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/phil.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/beth.jpeg" alt="..." class="img-rounded-sm"></a>
-
-    <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/phil.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/beth.jpeg" alt="..." class="img-rounded-sm"></a>
-
-    <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/phil.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/beth.jpeg" alt="..." class="img-rounded-sm"></a>
-
-    <a href=""><img src="/images/jeff.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/phil.jpeg" alt="..." class="img-rounded-sm"></a>
-    <a href=""><img src="/images/beth.jpeg" alt="..." class="img-rounded-sm"></a>
+    <% User.all.each do|user| %>
+      <a href=""><img src=<%=user.avatar_url%> alt="..." class="img-rounded-sm"></a> <!-- TO DO: DIRECT LINK TO USER'S PROFILE -->
+    <% end %>
+    <br><br><br><br><br>
+  
   </div>
   
   <div class="col-md-10">
-    <h2>Leaderboard</h2>
+    <h2>Overview </h2>
     <table class="table">
       <tr>
         <th>Username</th>
@@ -45,49 +108,58 @@
         <th>Achievements</th>
         <th>Score</th>
       </tr>
-
+      
+      <%User.all.each do|user|%>
+      <%i=0%>
       <tr>
-        <td>someonetookit</td>
-        <td>Jeff</td>
-        <td>Shih</td>
+        <td><%= user.username%></td>
+        <td><%= user.first_name%></td>
+        <td><%= user.last_name%></td>
         <td>
-          <img src="/images/flat_open.png" alt="..." class="img-achievement-3">
-          <img src="/images/outline_earth.png" alt="..." class="img-achievement-1">
-          <img src="/images/flat_motherboard.png" alt="..." class="img-achievement-3">
-          <img src="/images/solid_documents.png" alt="..." class="img-achievement-2">
-        </td>
-        <td>X</td>
-      </tr>
+          <!-- TO DO: DISPLAY CORRECT CSS CLASS AS PER LEVEL -->
+          <%if user.acct_age_level !=0%>
+            <img src=<%=Achievement.where(name: "Account Open",level: user.acct_age_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-      <tr>
-        <td>philemonlloyds</td>
-        <td>Philemon</td>
-        <td>Selvaraj</td>
-        <td>
-          <img src="/images/flat_open.png" alt="..." class="img-achievement-3">
-          <img src="/images/flat_earth.png" alt="..." class="img-achievement-3">
-          <img src="/images/solid_motherboard.png" alt="..." class="img-achievement-2">
-          <img src="/images/flat_documents.png" alt="..." class="img-achievement-3">
-        </td>
-        <td>X</td>
-      </tr>
+          <%if user.languages_level !=0%>
+            <img src=<%=Achievement.where(name: "Language",level: user.languages_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
 
-      <tr>
-        <td>bhammett</td>
-        <td>Beth</td>
-        <td>Hammett</td>
-        <td>
-          <img src="/images/outline_open.png" alt="..." class="img-achievement-1">
-          <img src="/images/solid_earth.png" alt="..." class="img-achievement-2">
-          <img src="/images/flat_motherboard.png" alt="..." class="img-achievement-3">
-          <img src="/images/flat_documents.png" alt="..." class="img-achievement-3">
+          <%if user.followers_level !=0%>
+            <img src=<%=Achievement.where(name: "Followers",level: user.followers_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
+
+          <%if user.forks_level !=0%>
+            <img src=<%=Achievement.where(name: "Forks",level: user.forks_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
+
+          <%if user.repos_level !=0%>
+            <img src=<%=Achievement.where(name: "Repos",level: user.repos_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
+
+          <%if user.commits_level !=0%>
+            <img src=<%=Achievement.where(name: "Commits",level: user.commits_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
+
+          <%if user.stars_level !=0%>
+            <img src=<%=Achievement.where(name: "Stars",level: user.stars_level)[i][:url]%> alt="Lvl. 2" class="img-achievement-2">
+          <%end%>
         </td>
-        <td>X</td>
+        <td>
+          <%= user.score %>
+        </td>
       </tr>
+      <% i+=1 %>
+      <% end %>
     </table>
   </div>
 
-  <div class="col-md-10">
-  <h2>Statistics (Graphs & Charts)</h2>
+  <div class="col-md-12">
+    <h2>Statistics </h2>
+    <h4>Me <span style="color:white">vs Average Achievement Level</span></h4>
+    <canvas id="achievements"></canvas>
+
+    <h4>Members <span style="color:white">vs Average Score</span></h4>
+    <canvas id="average_scores"></canvas>
   </div>
 </div>

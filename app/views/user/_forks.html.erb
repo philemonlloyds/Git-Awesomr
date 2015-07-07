@@ -1,0 +1,28 @@
+<% unless @forks_ach_url_1 %>
+  <br>Your repositories have been forked <%= @forks_all %> times, you need 1 to unlock level 1.
+<% end %>
+
+<% if @forks_ach_url_1 %>
+  <img src="/images/outline_fork.png" alt="Lvl. 1" class="img-achievement-1">
+  <% unless @forks_ach_url_2 %>
+    <br>Your repositories have been forked <%= @forks_all %> time(s), you need 3 to unlock level 2.
+  <% end %>
+<% end %>
+
+<% if @forks_ach_url_2 %>
+  <img src="/images/solid_fork.png" alt="Lvl. 2" class="img-achievement-2">
+  <% unless @forks_ach_url_3 %>
+    <br>Your repositories have been forked <%= @forks_all %> times, you need 5 to unlock level 3.
+  <% end %>
+<% end %>
+
+<% if @forks_ach_url_3 %>
+  <img src="/images/flat_fork.png" alt="Lvl. 3" class="img-achievement-3">
+  <br>Your repositories have been forked <%= @forks_all %> times.
+<% end %>
+
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: <%= if @progress_bar_forks.to_i > 100 then 100 else @progress_bar_forks.to_i end %>%; min-width: 2em;">
+    <%= if @progress_bar_forks.to_i > 100 then 100 else @progress_bar_forks.to_i end %>%
+  </div>
+</div>

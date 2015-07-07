@@ -1,62 +1,68 @@
-<h2>Hello, @user.first_name ('/user/:id')</h2>
+<h2>Hello, 
+  <% if @user %>
+    <%= @user.first_name %>
+  <% else %>
+    <span style="color: red">Not logged in</span>
+  <% end %>
+
+</h2>
+
 <hr>
 <div class="row">
   <div class="col-md-2">
-    <br>
+    <b
     <a href="" class="img-container">
-      <img src="/images/jeff.jpeg" alt="..." class="img-rounded-bg">
-      <span class="score-bg">28</span>
+      <img src=<%= @user.avatar_url %> alt=<%= @user.avatar_url %> class="img-rounded-bg">
+      <span class="score-bg">
+        <%= @user.score %>
+      </span>
     </a>
     <br>
     
-    <h4>Belongs to: </h4>
-    <a href=""><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
+    <h4>Location: </h4>
+    <p><%= @user.location %></p>
+
+    <h4>Languages: </h4>
+    <% lang_all=[] %>
+    <% @user.repos.each do |repo| %>
+      <% lang_all << repo.language if repo.language !="nil" %>
+    <% end %>
+     <% lang_all.compact! %>
+    <% lang_all.uniq! %>
+    <% lang_all.each do |lang| %>
+      <%= lang %><br>
+    <% end %>
+
+    <h4>Member of: </h4>
+    <a href="/group?id=<%=@user.id%>"><img src="/images/lighthouse.png" alt="..." class="img-rounded-sm"></a>
   </div>
   
   <div class="col-md-5">
     <h2>Achievements</h2>
-    <img src="/images/outline_open.png" alt="..." class="img-achievement-1">
-    <img src="/images/solid_open.png" alt="..." class="img-achievement-2">
-    <img src="/images/flat_open.png" alt="..." class="img-achievement-3"><br>
-    Have your GitHub account registered longer than a year<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
+    <!-- ACCOUNT OPEN ACHIEVEMENT -->
+     <%= erb :"user/_accountopen.html"%>
+   
+    <!-- LANGUAGES ACHIEVEMENT -->
+    <%= erb :"user/_language.html"%>
 
-    <img src="/images/outline_earth.png" alt="..." class="img-achievement-1">
-    <img src="/images/solid_earth.png" alt="..." class="img-achievement-2">
-    <img src="/images/flat_earth.png" alt="..." class="img-achievement-3"><br>
-    Have more than 50 followers<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
+    <!-- FOLLOWERS ACHIEVEMENT -->
+    <%= erb :"user/_followers.html"%>
 
-    <img src="/images/outline_motherboard.png" alt="..." class="img-achievement-1">
-    <img src="/images/solid_motherboard.png" alt="..." class="img-achievement-2">
-    <img src="/images/flat_motherboard.png" alt="..." class="img-achievement-3"><br>
-    Have an active streak longer than 10 days<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>
+    <!-- REPOSITORIES ACHIEVEMENT -->
+    <%= erb :"user/_repositories.html"%>
+  
+    <!-- FORKS ACHIEVEMENT -->
+    <%= erb :"user/_forks.html"%>
+   
+    <!-- COMMITS ACHIEVEMENT -->
+    <%= erb :"user/_commits.html"%>
 
-    <img src="/images/outline_documents.png" alt="..." class="img-achievement-1">
-    <img src="/images/solid_documents.png" alt="..." class="img-achievement-2">
-    <img src="/images/flat_documents.png" alt="..." class="img-achievement-3"><br>
-    Have more than 10 repositories<br>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;">
-        100%
-      </div>
-    </div>    
+    <!-- STARS ACHIEVEMENT -->
+    <%= erb :"user/_stars.html"%>  
   </div>
 
   <div class="col-md-5">
-  <h2>Popular Repositories: </h2>
+    <h2>Popular Repositories: </h2>
+    <%= erb :"user/_poprepos.html" %>  
   </div>
 </div>

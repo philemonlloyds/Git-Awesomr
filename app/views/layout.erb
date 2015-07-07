@@ -13,34 +13,23 @@
   <title>Git Awesomr</title>
   <link rel="stylesheet" href="/stylesheets/bootstrap.css">
   <link rel="stylesheet" href="/stylesheets/custom_template.css">
+
+  <!-- JS FILES ARE TPYICALLY PLACED RIGHT BEFORE THE CLOSING BODY TAG TO MAKE PAGES LOAD FASTER, BUT WE NEED THEM TO LOAD FIRST IN OUR CASE TO DISPLAY CHARTJS -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/javascript/chartjs/Chart.js"></script>
+  <script src="/javascript/application.js"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span>|</span></a>
-        <a class="navbar-brand" href="/"><span style="font-size: 18px; color:white">Profile</span></a>
-        <a class="navbar-brand" href="/"><span style="font-size: 18px; color:white">Group</span></a>
-      </div>
-
-      <div id="navbar" class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right">
-          <button type="submit" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></button>
-          <button type="submit" class="btn btn-default">Sign out</button>
-        </form>
-      </div><!--/.navbar-collapse -->
-
-    </div>
-  </nav>
-
-    <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form navbar-right">
-        <!-- LOGIN FORM -->
-        <!-- <div class="form-group">
-          <input type="text" placeholder="Email" class="form-control">
+  <% if @user %> <!-- ONLY DISPLAY NAV BAR IF USER IS LOGGED IN -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/login"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span><% if @user %>| <% end%></span></a>      
+            <a class="navbar-brand" href="/login"><span style="font-size: 18px; color:white">Profile</span></a>
+            <a class="navbar-brand" href="/group?id=<%=@user.id%>"><span style="font-size: 18px; color:white">Group</span></a>
         </div>
+<<<<<<< HEAD
         <div class="form-group">
           <input type="password" placeholder="Password" class="form-control">
         </div> -->
@@ -53,18 +42,29 @@
   </div>
 </nav>
 
+=======
+        <div id="navbar">
+          <form class="navbar-form navbar-right">
+            <!-- <div class="form-group">
+              <input type="text" class="form-control" placeholder="Git Username">
+            </div>
+            
+            <a href="" class="btn btn-default">Search</a> -->
+            <a href="/logout" class="btn btn-default">Sign out</a>
+          </form>
+        </div>
+      </div>
+    </nav>
+  <% end %>
+>>>>>>> c18f0f1c8441a55bcd412796661e5e324c1735ba
 
   <div class="container">
-    
     <%= yield %>
-    
-    <!-- <hr> -->
-<!--     <footer>
-      <p align="right">Insert footer here</p>
-    </footer> -->
-  </div><!-- /container -->
-
-  <!-- Placed at the end of the document so the pages load faster -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="/javascript/application.js"></script>
+    <% if @user %> <!-- ONLY DISPLAY FOOTER IF USER IS LOGGED IN -->
+      <hr>
+      <footer>
+        <br><!-- <p align="right">Insert footer here</p> -->
+      </footer>
+    <% end %>
+  </div>
 </body>

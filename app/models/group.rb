@@ -1,3 +1,4 @@
 class Group < ActiveRecord::Base
-  has_many :users, foreign_key: 'group_id'
+  has_many :memberships
+  has_many :users, through: :memberships
 end
