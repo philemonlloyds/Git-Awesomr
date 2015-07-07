@@ -8,7 +8,7 @@ require 'sinatra'
 require 'sinatra/activerecord'
 require 'sinatra/contrib/all' # Requires cookies, among other things
 
-require 'pry'
+require 'pry' unless ENV['RACK_ENV'] == 'production'
 
 require 'rest-client'
 require 'json'

@@ -1,8 +1,6 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-
-gem 'sqlite3'
 gem 'rake'
 gem 'activesupport'
 
@@ -18,4 +16,9 @@ gem "octokit", "~> 3.0"
 group :development, :test do
   gem 'pry'
   gem 'shotgun'
+  gem 'sqlite3'
+end
+
+group :production do
+  gem 'pg'
 end
