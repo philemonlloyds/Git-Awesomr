@@ -309,7 +309,7 @@ get '/login' do
     data = client.user
     user = User.find_by(username: data.login)
     session[:user_id] = user.id
-    redirect "http://gitawesomer.herokuapp.com/user/#{user.username}"
+    redirect "/user/#{user.username}"
 end
 end
 
@@ -356,12 +356,12 @@ get '/callback' do
 
   session[:user_id] = user.id
 
-  redirect "http://gitawesomer.herokuapp.com/user/#{user.username}"
+  redirect "/user/#{user.username}"
 end
 
 get '/logout' do
   session.clear
-  redirect 'http://gitawesomer.herokuapp.com'
+  redirect '/'
 end
 
 get '/user' do
