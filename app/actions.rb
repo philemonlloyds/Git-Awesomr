@@ -284,7 +284,7 @@ get '/user/:username' do
   erb :'user/index'
 end
 
-get 'gitawesomer.herokuapp.com/login' do
+get '/login' do
   if !authenticated?
     authenticate!
   else
@@ -313,7 +313,7 @@ get 'gitawesomer.herokuapp.com/login' do
 end
 end
 
-get 'gitawesomer.herokuapp.com/callback' do
+get '/callback' do
   session_code = request.env['rack.request.query_hash']['code']
   result = Octokit.exchange_code_for_token(session_code, CLIENT_ID, CLIENT_SECRET)
   session[:access_token] = result[:access_token]
@@ -359,16 +359,16 @@ get 'gitawesomer.herokuapp.com/callback' do
   redirect "/user/#{user.username}"
 end
 
-get 'gitawesomer.herokuapp.com/logout' do
+get '/logout' do
   session.clear
   redirect '/'
 end
 
-get 'gitawesomer.herokuapp.com/user' do
+get '/user' do
   erb :'user/index'
 end
 
-get 'gitawesomer.herokuapp.com/id' do
+get '/id' do
   @user = current_user
   erb :'/users/id'
 end
@@ -390,7 +390,7 @@ end
 #     end
 # end
 
-get 'gitawesomer.herokuapp.com/group' do
+get '/group' do
   # GRAPH DATA
   @user_id = params["id"]
   @user = User.find(@user_id)
