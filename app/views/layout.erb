@@ -25,45 +25,30 @@
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/login"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span><% if @user %>| <% end%></span></a>      
+            <a class="navbar-brand" href="/login"><span style="font-size: 24px; color:white">Git <span style="color:#FFCE54">Awesomr </span><% if @user %>| <% end%></span></a>
             <a class="navbar-brand" href="/login"><span style="font-size: 18px; color:white">Profile</span></a>
             <a class="navbar-brand" href="/group?id=<%=@user.id%>"><span style="font-size: 18px; color:white">Group</span></a>
         </div>
-<<<<<<< HEAD
-        <div class="form-group">
-          <input type="password" placeholder="Password" class="form-control">
-        </div> -->
-        <% if @user then %>
-        <% else %>
-        <a href="/login" class="btn btn-success">Sign in with GitHub <img src="/images/icn_join_w.png" alt="Join" height="20" width="20"></a>
-        <%end%>
-      </form>
-    </div><!--/.navbar-collapse -->
-  </div>
-</nav>
-
-=======
         <div id="navbar">
           <form class="navbar-form navbar-right">
-            <!-- <div class="form-group">
+            <div class="form-group">
               <input type="text" class="form-control" placeholder="Git Username">
             </div>
-            
-            <a href="" class="btn btn-default">Search</a> -->
+
+            <!-- <a href="" class="btn btn-default">Search</a> -->
             <a href="/logout" class="btn btn-default">Sign out</a>
           </form>
         </div>
       </div>
     </nav>
   <% end %>
->>>>>>> c18f0f1c8441a55bcd412796661e5e324c1735ba
 
   <div class="container">
     <%= yield %>
     <% if @user %> <!-- ONLY DISPLAY FOOTER IF USER IS LOGGED IN -->
       <hr>
       <footer>
-        <br><!-- <p align="right">Insert footer here</p> -->
+        <p align="right">Insert footer here</p>
       </footer>
     <% end %>
   </div>
